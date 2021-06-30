@@ -4,7 +4,8 @@ def tampil():
     print "1. Masukkan Ip"
     print "2. Masukkan DHCP"
     print "3. Masukkan Routing"
-    print "4. Tidak Ada"
+    print "4. Tampilkan IP"
+    print "5. Tidak Ada"
 
     pilihan = raw_input("Masukkan Pilihan :")
 
@@ -31,7 +32,7 @@ def tampil():
         tn.write("end\n")
         tn.write("exit\n")
         print tn.read_all()
-        v = raw_input("Masukkan Y untuk kembali")
+        v = raw_input("Masukkan Y untuk kembali :")
         if(v == "Y"):
             os.system('clear')
             tampil()
@@ -62,7 +63,7 @@ def tampil():
         tn.write("end\n")
         tn.write("exit\n")
         print tn.read_all()
-        v = raw_input("Masukkan Y untuk kembali")
+        v = raw_input("Masukkan Y untuk kembali :")
         if (v == "Y"):
             os.system('clear')
             tampil()
@@ -88,15 +89,30 @@ def tampil():
         tn.write("end\n")
         tn.write("exit\n")
         print tn.read_all()
-        v = raw_input("Masukkan Y untuk kembali")
+        v = raw_input("Masukkan Y untuk kembali :")
         if (v == "Y"):
             os.system('clear')
             tampil()
     elif (pilihan == "4"):
+        show = ['192.168.1.1','192.168.1.3']
+        user = raw_input("Masukkan Username :")
+        password = raw_input("Masukkan Password :")
+        for q in show:
+            tn = telnetlib.Telnet(q)
+            tn.read_until("Username:")
+            tn.write(user + "\n")
+            tn.read_until("Password:")
+            tn.write(password + "\n")
+            tn.write("conf t\n")
+            tn.write("do show ip route\n")
+            tn.write("end\n")
+            tn.write("exit\n")
+            print tn.read_all()
+        v = raw_input("Masukkan Y untuk kembali :")
+        if (v == "Y"):
+            os.system('clear')
+            tampil()
+    elif (pilihan == "5"):
         os.system('clear')
         tampil()
 tampil()
-
-
-
-
