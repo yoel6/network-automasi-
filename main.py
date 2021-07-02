@@ -6,7 +6,7 @@ def tampil():
     print "2. Masukkan DHCP"
     print "3. Masukkan Routing"
     print "4. Masukkan IP dengan vlan"
-    print "5. VLAN"
+    print "6. VLAN Switch"
     print "4. Tidak Ada"
     pilihan = raw_input("Masukkan Pilihan :")
     if(pilihan=="1"):
@@ -167,7 +167,36 @@ def tampil():
         if (v == "Y"):
             os.system('clear')
             tampil()
-    elif (pilihan == "5"):
+    elif(pilihan == "5"):
+        host1 = raw_input("Masukkan ip telnet :")
+        jumlah_vlan = raw_input("Masukkan jumlah vlan yang akan di buat :")
+        k = int(jumlah_vlan)
+        for d in range(k):
+            vlan = raw_input("Masukkan no vlan:")
+            vlan1 = raw_input("Masukkan nama vlan:")
+            interface2 = raw_input("Masukkan Interface Yang Ada:")
+            tn = telnetlib.Telnet(host1)
+
+            tn.read_until("Username:")
+            tn.write(q + "\n")
+
+            tn.read_until("Password:")
+            tn.write(q + "\n")
+
+            tn.write("conf t\n")
+            tn.write("vlan {}\n".format(vlan))
+            tn.write("name {}\n".format(vlan1))
+            tn.write("int {}\n".format(interface2))
+            tn.write("sw mode access\n")
+            tn.write("sw access vlan {}\n".format(vlan))
+            tn.write("end\n")
+            tn.write("exit\n")
+            print tn.read_all()
+        v = raw_input("Masukkan Y untuk kembali")
+        if (v == "Y"):
+            os.system('clear')
+            tampil()
+    elif(pilihan == "5"):
         os.system('clear')
         tampil()
     else:
