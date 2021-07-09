@@ -183,9 +183,7 @@ class telnet():
                 tn.read_until("Password:")
                 tn.write(q + "\n")
 
-                tn.write("conf t\n")
-                tn.write("vlan {}\n".format(vlan))
-                tn.write("name {}\n".format(vlan1))
+                tn.write("conf t\n") 
                 tn.write("int {}\n".format(interface2))
                 tn.write("sw mode access\n")
                 tn.write("sw access vlan {}\n".format(vlan))
