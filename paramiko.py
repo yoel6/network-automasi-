@@ -102,10 +102,10 @@ class automation():
         for q in range(e):
             t = a[q]
             x.append(t)
-        for g in range(1,e):
-            f = x[g - 1]
-            z = int(f)
-            y = hostname[z - 1]
+        print(x)
+        for g in x:
+            z =int(g)
+            y = hostname[z-1]
             print("================={}=================".format(y))
             b = input("masukan Ip :")
             d = input("masukan subnetmask :")
@@ -133,7 +133,6 @@ class automation():
         if (q == "y"):
             os.system('clear')
             automation.pilihan(self)
-    def dhcp(self):
 
 wiwin = automation()
 wiwin.pilihan()
