@@ -131,6 +131,59 @@ class automation():
         if (q == "y"):
             os.system('clear')
             automation.pilihan(self)
-
+    def dhcp(self):
+        x = []
+        ssh_client = paramiko.SSHClient()
+        ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        hostname = ['192.168.122.71', '192.168.122.90', '192.168.122.171']
+        g = len(hostname)
+        v = int(g)
+        for h in range(v):
+            c = hostname[h]
+            print('{}.{}'.format(h + 1, c))
+        a = input("masukan Pilihan hostname :")
+        u = len(a)
+        e = int(u)
+        for q in range(e):
+            t = a[q]
+            x.append(t)
+        print(x)
+        for g in x:
+            z = int(g)
+            y = hostname[z - 1]
+            print("================={}=================".format(y))
+            ssh_client.connect(hostname=y, username="cisco", password="cisco")
+            conn = ssh_client.invoke_shell()
+            conn.send("enable\n")
+            conn.send("cisco\n")
+            conn.send("show ip interface brief\n")
+            conn.send("exit\n")
+            conn.send("end\n")
+            time.sleep(1)
+            output = conn.recv(65535)
+            print(output.decode("ascii"))
+            ssh_client.close()
+            b = input("masukan network :")
+            f = input("masukan ip dhcp :")
+            d = input("masukan subnetmask :")
+            e = input("masukkan nama dhcp :")
+            ssh_client.connect(hostname=y, username="cisco", password="cisco")
+            conn = ssh_client.invoke_shell()
+            conn.send("enable\n")
+            conn.send("cisco\n")
+            conn.send("conf t\n")
+            conn.send("ip dhcp pool {}\n".format(e))
+            conn.send("network {} {}\n".format(b, d))
+            conn.send("default-router {}\n".format(f))
+            conn.send("exit\n")
+            conn.send("end\n")
+            time.sleep(1)
+            output = conn.recv(65535)
+            print(output.decode("ascii"))
+            ssh_client.close()
+        q = input("Apakah Anda Ingin Mengulangnya :")
+        if (q == "y"):
+            os.system('clear')
+            automation.pilihan(self)
 wiwin = automation()
 wiwin.pilihan()
