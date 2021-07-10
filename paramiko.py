@@ -24,7 +24,7 @@ class automation():
     def pengalamanip(self):
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.122.71','192.168.122.90']
+        hostname = ['192.168.122.71','192.168.122.90','192.168.122.90']
         g = len(hostname)
         v = int(g)
         for h in range(v):
@@ -56,7 +56,7 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.122.71','192.168.122.90']
+        hostname = ['192.168.122.71','192.168.122.90','192.168.122.90']
         g = len(hostname)
         v = int(g)
         for h in range(v):
@@ -90,7 +90,7 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.122.71','192.168.122.90']
+        hostname = ['192.168.122.71','192.168.122.90','192.168.122.171']
         g = len(hostname)
         v = int(g)
         for h in range(v):
@@ -119,7 +119,6 @@ class automation():
             conn.send("int {}.{}\n".format(c,e))
             conn.send("encapsulation dot1Q {}\n".format(e))
             conn.send("ip address {} {}\n".format(b, d))
-            conn.send("exit\n".format(e))
             conn.send("int {}\n".format(c))
             conn.send("no sh\n")
             conn.send("exit\n")
@@ -128,7 +127,6 @@ class automation():
             output = conn.recv(65535)
             print(output.decode("ascii"))
             ssh_client.close()
-        print(x)
         q = input("Apakah Anda Ingin Mengulangnya :")
         if (q == "y"):
             os.system('clear')
