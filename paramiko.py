@@ -195,12 +195,11 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.122.91','192.168.122.116']
-        switch = ['192.168.1.1']
-        g = len(hostname)
+        switch = ['192.168.11.1','192.168.11.2']
+        g = len(switch)
         v = int(g)
         for h in range(v):
-            c = hostname[h]
+            c = switch[h]
             print('{}.{}'.format(h + 1, c))
         a = input("masukan Pilihan hostname :")
         u = len(a)
@@ -211,7 +210,7 @@ class automation():
         print(x)
         for g in x:
             z = int(g)
-            y = hostname[z - 1]
+            y = switch[z - 1]
             print("================={}=================".format(y))
             ssh_client.connect(hostname=y, username="cisco", password="cisco")
             conn = ssh_client.invoke_shell()
