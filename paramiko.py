@@ -2,6 +2,10 @@ import paramiko
 import time
 import os
 class automation():
+
+    def __init__(self):
+        self.hostname=['192.168.1.1','192.168.1.3']
+        
     def pilihan(self):
         print("==================Aplikasi Automation==================")
         print("1.Pengalamatan IP")
@@ -33,17 +37,16 @@ class automation():
     def pengalamanip(self):
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.1.1','192.168.1.3']
-        g = len(hostname)
+        g = len(self.hostname)
         v = int(g)
         for h in range(v):
-            c = hostname[h]
+            c = self.hostname[h]
             print('{}.{}'.format(h+1,c))
         a = int(input("masukan Pilihan hostname :"))
         b = input("masukan Ip :")
         d = input("masukan subnetmask :")
         c = input("masukan interface :")
-        x = hostname[a-1]
+        x = self.hostname[a-1]
         ssh_client.connect(hostname=x,username="cisco",password="cisco")
         conn = ssh_client.invoke_shell()
         conn.send("enable\n")
@@ -65,11 +68,10 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.1.1','192.168.1.3']
-        g = len(hostname)
+        g = len(self.hostname)
         v = int(g)
         for h in range(v):
-            c = hostname[h]
+            c = self.hostname[h]
             print('{}.{}'.format(h+1,c))
         a = input("masukan Pilihan hostname :")
         u = len(a)
@@ -79,7 +81,7 @@ class automation():
             x.append(t)
         for w in x:
             y = int(w)
-            x = hostname[y-1]
+            x = self.hostname[y-1]
             ssh_client.connect(hostname=x,username="cisco",password="cisco")
             conn = ssh_client.invoke_shell()
             conn.send("enable\n")
@@ -99,11 +101,10 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.1.1','192.168.1.3']
-        g = len(hostname)
+        g = len(self.hostname)
         v = int(g)
         for h in range(v):
-            c = hostname[h]
+            c = self.hostname[h]
             print('{}.{}'.format(h + 1, c))
         a = input("masukan Pilihan hostname :")
         u = len(a)
@@ -114,7 +115,7 @@ class automation():
         print(x)
         for g in x:
             z =int(g)
-            y = hostname[z-1]
+            y = self.hostname[z-1]
             print("================={}=================".format(y))
             b = input("masukan Ip :")
             d = input("masukan subnetmask :")
@@ -144,11 +145,10 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.1.1','192.168.1.3']
-        g = len(hostname)
+        g = len(self.hostname)
         v = int(g)
         for h in range(v):
-            c = hostname[h]
+            c = self.hostname[h]
             print('{}.{}'.format(h + 1, c))
         a = input("masukan Pilihan hostname :")
         u = len(a)
@@ -159,7 +159,7 @@ class automation():
         print(x)
         for g in x:
             z = int(g)
-            y = hostname[z - 1]
+            y = self.hostname[z - 1]
             print("================={}=================".format(y))
             print("1.Buat DHCP")
             print("2.tampilkan DHCP")
@@ -214,12 +214,10 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.1.1','192.168.1.3']
-        switch = ['192.168.1.1']
-        g = len(hostname)
+        g = len(self.hostname)
         v = int(g)
         for h in range(v):
-            c = hostname[h]
+            c = self.hostname[h]
             print('{}.{}'.format(h + 1, c))
         a = input("masukan Pilihan hostname :")
         u = len(a)
@@ -230,53 +228,35 @@ class automation():
         print(x)
         for g in x:
             z = int(g)
-            y = hostname[z - 1]
+            y = self.hostname[z - 1]
             print("================={}=================".format(y))
-            print("1.Buat Swiching")
-            print("2.tampilkan Swithing")
-            q = int(input("Masukan Inputan : "))
-            if(q == 1):
-                ssh_client.connect(hostname=y, username="cisco", password="cisco")
-                conn = ssh_client.invoke_shell()
-                print(switch)
-                conn.send("enable\n")
-                conn.send("cisco\n")
-                conn.send("show vlan\n")
-                conn.send("exit\n")
-                conn.send("end\n")
-                time.sleep(1)
-                output = conn.recv(65535)
-                print(output.decode("ascii"))
-                ssh_client.close()
-                b = input("masukan interface:")
-                f = input("masukan no vlan :")
-                ssh_client.connect(hostname=y, username="cisco", password="cisco")
-                conn = ssh_client.invoke_shell()
-                conn.send("enable\n")
-                conn.send("cisco\n")
-                conn.send("conf t\n")
-                conn.send("int {}\n".format(b))
-                conn.send("sw mode access\n")
-                conn.send("sw access vlan {}\n".format(f))
-                conn.send("exit\n")
-                conn.send("end\n")
-                time.sleep(1)
-                output = conn.recv(65535)
-                print(output.decode("ascii"))
-                ssh_client.close()
-            elif(q == 2):
-                ssh_client.connect(hostname=y, username="cisco", password="cisco")
-                conn = ssh_client.invoke_shell()
-                print(switch)
-                conn.send("enable\n")
-                conn.send("cisco\n")
-                conn.send("show vlan\n")
-                conn.send("exit\n")
-                conn.send("end\n")
-                time.sleep(1)
-                output = conn.recv(65535)
-                print(output.decode("ascii"))
-                ssh_client.close()  
+            ssh_client.connect(hostname=y, username="cisco", password="cisco")
+            conn = ssh_client.invoke_shell()
+            conn.send("enable\n")
+            conn.send("cisco\n")
+            conn.send("show vlan\n")
+            conn.send("exit\n")
+            conn.send("end\n")
+            time.sleep(1)
+            output = conn.recv(65535)
+            print(output.decode("ascii"))
+            ssh_client.close()
+            b = input("masukan interface:")
+            f = input("masukan no vlan :")
+            ssh_client.connect(hostname=y, username="cisco", password="cisco")
+            conn = ssh_client.invoke_shell()
+            conn.send("enable\n")
+            conn.send("cisco\n")
+            conn.send("conf t\n")
+            conn.send("int {}\n".format(b))
+            conn.send("sw mode access\n")
+            conn.send("sw access vlan {}\n".format(f))
+            conn.send("exit\n")
+            conn.send("end\n")
+            time.sleep(1)
+            output = conn.recv(65535)
+            print(output.decode("ascii"))
+            ssh_client.close()
         q = input("Apakah Anda Ingin Mengulangnya :")
         if (q == "y"):
             os.system('clear')
@@ -285,11 +265,10 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.1.1','192.168.1.3']
-        g = len(hostname)
+        g = len(self.hostname)
         v = int(g)
         for h in range(v):
-            c = hostname[h]
+            c = self.hostname[h]
             print('{}.{}'.format(h+1,c))
         a = input("masukan Pilihan hostname :")
         u = len(a)
@@ -299,7 +278,7 @@ class automation():
             x.append(t)
         for w in x:
             y = int(w)
-            x = hostname[y-1]
+            x = self.hostname[y-1]
             ssh_client.connect(hostname=x,username="cisco",password="cisco")
             conn = ssh_client.invoke_shell()
             conn.send("enable\n")
@@ -334,11 +313,10 @@ class automation():
         x = []
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        hostname = ['192.168.1.1','192.168.1.3']
-        g = len(hostname)
+        g = len(self.hostname)
         v = int(g)
         for h in range(v):
-            c = hostname[h]
+            c = self.hostname[h]
             print('{}.{}'.format(h+1,c))
         a = input("masukan Pilihan hostname :")
         u = len(a)
@@ -355,7 +333,7 @@ class automation():
             q =int(input("Masukkan Pilihan :"))
             if(q == 1):
                 y = int(w)
-                x = hostname[y-1]
+                x = self.hostname[y-1]
                 ssh_client.connect(hostname=x,username="cisco",password="cisco")
                 conn = ssh_client.invoke_shell()
                 conn.send("enable\n")
@@ -388,7 +366,7 @@ class automation():
                 ssh_client.close()
             elif(q == 2):
                 y = int(w)
-                x = hostname[y - 1]
+                x = self.hostname[y - 1]
                 ssh_client.connect(hostname=x, username="cisco", password="cisco")
                 conn = ssh_client.invoke_shell()
                 conn.send("enable\n")
@@ -420,7 +398,7 @@ class automation():
                 ssh_client.close()
             elif (q == 3):
                 y = int(w)
-                x = hostname[y - 1]
+                x = self.hostname[y - 1]
                 ssh_client.connect(hostname=x, username="cisco", password="cisco")
                 conn = ssh_client.invoke_shell()
                 conn.send("enable\n")
@@ -451,7 +429,7 @@ class automation():
                 ssh_client.close()
             elif (q == 4):
                 y = int(w)
-                x = hostname[y - 1]
+                x = self.hostname[y - 1]
                 ssh_client.connect(hostname=x, username="cisco", password="cisco")
                 conn = ssh_client.invoke_shell()
                 conn.send("enable\n")
